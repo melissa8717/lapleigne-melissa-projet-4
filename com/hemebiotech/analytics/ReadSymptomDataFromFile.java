@@ -1,10 +1,9 @@
 package com.hemebiotech.analytics;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Simple brute force implementation
@@ -12,36 +11,38 @@ import java.util.List;
  */
 public class ReadSymptomDataFromFile implements ISymptomReader {
 
-	private String filepath;
+    private static HashMap<String, Integer> symtomMap = new HashMap<String, Integer>();
+    private final BufferedReader filepath;
 	
 	/**
 	 * 
 	 * @param filepath a full or partial path to file with symptom strings in it, one per line
 	 */
-	public ReadSymptomDataFromFile (String filepath) {
-		this.filepath = filepath;
+	public ReadSymptomDataFromFile() throws FileNotFoundException {
+		filepath = new BufferedReader(new FileReader("symtoms.txt"));
+                ///System.out.println("filepath :"+filepath);
 	}
-	
-	@Override
-	public List<String> getSymptoms() {
-		ArrayList<String> result = new ArrayList<String>();
-		
-		if (filepath != null) {
-			try {
-				BufferedReader reader = new BufferedReader (new FileReader(filepath));
-				String line = reader.readLine();
-				
-				while (line != null) {
-					result.add(line);
-					line = reader.readLine();
+
+	public HashMap<String, Integer> GetSymptoms() {
+              
+                    try(filepath){
+			for (String ligne = filepath.readLine(); ligne != null; ligne = filepath.readLine()) {
+                            //enlever ligne vide
+				for (String symtom : ligne.split(",")) {
+                                    if ( symtomMap.containsKey( symtom  ) ) {
+					symtomMap.put( symtom  , symtomMap.get(symtom ) + 1 );
+					}
+                                    else {
+                                            symtomMap.put( symtom  , 1 );
+					 }
 				}
-				reader.close();
-			} catch (IOException e) {
-				e.printStackTrace();
 			}
-		}
-		
-		return result;
+		} catch (IOException e) { 
+                    System.out.println(e);
+                            
+                  }
+             
+		return symtomMap;
 	}
 
 }

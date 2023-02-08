@@ -1,12 +1,7 @@
 package com.hemebiotech.analytics;
 
-import java.util.Map;
+import java.util.TreeMap;
 
-
-/**
- * Anything the will write symptom data on a valid data output format
- *
- */
-public interface ISymptomWriter {
-// WRITE YOUR CODE HERE
+public interface ISymtomWriter {
+    TreeMap<String, Integer> writeSymptoms();
 }
