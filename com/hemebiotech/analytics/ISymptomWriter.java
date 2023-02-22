@@ -13,6 +13,6 @@ public interface ISymptomWriter {
    *
    * @param symptoms the map containing the sorted symptoms and their count
    */
-  void writeSymptoms(Map<String, Integer> symptoms);
+ public void writeSymptoms(Map<String, Integer> symptoms);
 
 }

@@ -1,64 +1,46 @@
 package com.hemebiotech.analytics;
 
-import java.io.*;
-import java.util.*;
-import java.lang.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ReadSymptomDataFromFile implements ISymptomReader { 
-         
-private static ArrayList<String> symtomName = new ArrayList<String>();
-private static ArrayList<Integer> symtomCount = new ArrayList<Integer>();
+/**
+ * Simple brute force implementation
+ *
+ */
+public class ReadSymptomDataFromFile implements ISymptomReader {
 
-
-public  ArrayList<String>  countSymtom() throws FileNotFoundException, IOException{
-//	Map<String, Integer> symtomMap = new HashMap<String, Integer>();
-  FileInputStream fin = new FileInputStream("symtoms.txt");
-
-		// Illustrating getChannel() method
-		System.out.println(fin.getChannel());
-
-		// Illustrating getFD() method
-		System.out.println(fin.getFD());
-
-		// Illustrating available method
-		System.out.println("Number of remaining bytes:"
-						+ fin.available());
-
-		// Illustrating skip() method
-		fin.skip(4);
-
-		// Display message for better readability
-		System.out.println("FileContents :");
-
-		// Reading characters from FileInputStream
-		// and write them
-		int ch;
-
-		// Holds true till there is data inside file
-		while ((ch = fin.read()) != -1)
-			System.out.print((char)ch);
-
-		// Close the file connections
-		// using close() method
-		fin.close();
-
-     ArrayList<String> list = new ArrayList<String>();
-
-    return list;
+	private String filepath;
+	
+	/**
+	 * 
+	 * @param filepath a full or partial path to file with symptom strings in it, one per line
+	 */
+	public ReadSymptomDataFromFile (String filepath) {
+		this.filepath = filepath;
 	}
-
-
-
-
-   public ArrayList<String> getSymptoms(){
-
-    ArrayList<String> list = new ArrayList<String>();
-
-    return list;
-  }
-
-  
-
-  
+	
+	public List<String> getSymptoms() {
+		ArrayList<String> result = new ArrayList<String>();
+		
+		if (filepath != null) {
+			try {
+				BufferedReader reader = new BufferedReader (new FileReader(filepath));
+				String line = reader.readLine();
+				
+				while (line != null) {
+					result.add(line);
+					line = reader.readLine();
+				}
+				reader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
 
 }
