@@ -30,10 +30,10 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 				BufferedReader reader = new BufferedReader (new FileReader(filepath));
 				String line = reader.readLine();
 				
-				while (line != null) {
-					result.add(line);
-					line = reader.readLine();
-				}
+					while (line != null) {
+						result.add(line);
+						line = reader.readLine();
+					}
 				reader.close();
 			} catch (IOException e) {
 				e.printStackTrace();
