@@ -19,9 +19,12 @@ public class AnalyticsCounter {
   /** Classe qui récupère la liste de symptome avec l'objet reader**/
   public List<String> getSymptoms() {
     return reader.getSymptoms();
-  }
- 
+	}
+	/** NOTE:  le writer sera instancé dans  le main   **/
 
+    public void writeSymptoms(Map<String, Integer> symptoms) {
+    writer.writeSymptoms(symptoms);
+  }
 
    public Map<String,Integer> countSymptoms(List<String> symptoms) { 
 
@@ -43,10 +46,7 @@ public class AnalyticsCounter {
 												System.out.println(e);
 										}
 
-     return symtomMap;
-
-		
-         
+     return symtomMap;    
 
    }
 
@@ -55,10 +55,6 @@ public class AnalyticsCounter {
     return new TreeMap<>(symptoms);
   }
 
-/** NOTE:  le writer sera instancé dans  le main   **/
 
-    public void writeSymptoms(Map<String, Integer> symptoms) {
-    writer.writeSymptoms(symptoms);
-  }
 	
 }
