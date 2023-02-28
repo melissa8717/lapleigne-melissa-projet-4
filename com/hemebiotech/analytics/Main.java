@@ -11,16 +11,15 @@ public class Main {
  */
 
   public static void main(String args) throws Exception {
-
-    String fileToRead = null;
-    ISymptomReader reader = new ReadSymptomDataFromFile(fileToRead);
+    
+    String fileToRead = "symptoms.txt";
     ISymptomWriter writer = new WriteSymptomDataToFile();
-    AnalyticsCounter analytics = new AnalyticsCounter(reader, writer);
-
-    List<String> listSymptom = reader.getSymptoms();
-    writeSymptom = writer.writeSymptoms();
-    Map<String, Integer> countSymptom = analytics.countSymptoms(List < String > symptoms());
-    Map<String, Integer> sortSymtom = analytics.sortSymptoms(Map < String, Integer > symptoms());
+    ISymptomReader reader = new ReadSymptomDataFromFile(fileToRead);
+    AnalyticsCounter analyticsCounter = new AnalyticsCounter(reader, writer);
+    List<String> symptoms = analyticsCounter.getSymptoms();
+    Map<String, Integer> mapSymptoms = analyticsCounter.countSymptoms(symptoms);
+    Map<String, Integer> mapSymptomsSorted = analyticsCounter.sortSymptoms(mapSymptoms);
+    analyticsCounter.writeSymptoms(mapSymptomsSorted);
 
   }
 }
