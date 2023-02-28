@@ -7,13 +7,18 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * Simple implementation writing in a file.
+ * Résumé du rôle de la classe. Simple implementation writing in a file.
+ *
+ * @param ISymptomReader implémente l'interface
+ * @return
  */
 public class WriteSymptomDataToFile implements ISymptomWriter {
-  
+
   /**
-   * Write the result in the result.out file.
+   * Résumé du rôle de la méthode. Write the result in the result.out file.
+   *
    * @param symptoms the map containing the sorted symptoms and their count
+   * @return
    */
   public void writeSymptoms(Map<String, Integer> symptoms) {
     try (FileWriter writer = new FileWriter(new File("result.out"))) {
