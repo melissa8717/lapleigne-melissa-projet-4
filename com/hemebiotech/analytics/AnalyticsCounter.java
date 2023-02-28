@@ -1,6 +1,8 @@
 package com.hemebiotech.analytics;
 
 import java.util.Map;
+import java.util.List;
+
 
 /**
  * Résumé du rôle de la classe. Servant à initialiser toutes les méthodes writer
